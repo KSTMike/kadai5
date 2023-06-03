@@ -16,7 +16,9 @@
         <td><%= @post.content %></td>
       </tr>
 
+    <%= link_to "Tubuyakuuを編集する", edit_post_path(@post) %>
     <%= link_to 'Tubuyakuu一覧画面に戻る', posts_path %>
     <%= link_to '新しくTubuyakuu〜', new_post_path %>
+
     </table>
   <% end %>

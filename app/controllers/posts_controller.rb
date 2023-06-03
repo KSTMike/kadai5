@@ -7,12 +7,42 @@ class PostsController < ApplicationController
         @post = Post.new
     end
 
+    # @post = Post.find(params[id:])
+    # @post.update(post_params)
+
     def create
         Post.create(post_params)
-        redirect_to new_blog_path
+        redirect_to new_post_path
+    end
+
+    def show
+        params[:id]
+        @post = Post.find(params[:id])
+    end
+    
+    def edit
+        @post = Post.find(params[:id])
+    end
+
+    def update
+        @post = Post.update(params[:id])
+        if @post.update(post_params)
+            redirect_to posts_path, notice: "Tubuyakuuを編集しました！"
+        else
+            render :edit
+        end
+    end
+    
+    def destroy
+        @post = Post.destroy(params[:id])
+        redirect_to posts_path, notice: "Tubuyakuuを削除しました！"
     end
 
     private
+
+    def set_post
+        @post = Post.find(params[:id])
+    end
 
     def post_params
         params.require(:post).permit(:content)
