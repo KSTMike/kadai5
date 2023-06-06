@@ -1,24 +1,24 @@
 <%= form_with(model: @post, local: true) do |form| %>
-    <div class="post_content">
-      <%= form.label :content %>
-      <%= form.text_field :content %>
-    </div>
+  <div class="post_content">
+    <%= form.label :content %>
+    <%= form.text_field :content %>
+  </div>
 
-    <%= form.submit %>
-    <h1>Tubuyakuu一覧</h1>
+  <%= form.submit %>
+  <h1>Tubuyakuu一覧</h1>
 
-    <table>
-      <tr>
-        <th>内容</th>
-      </tr>
-    
-      <tr>
-        <td><%= @post.content %></td>
-      </tr>
+  <table>
+    <tr>
+      <th>内容</th>
+    </tr>
+  
+    <tr>
+      <td><%= @post.content %></td>
+    </tr>
 
     <%= link_to "Tubuyakuuを編集する", edit_post_path(@post) %>
     <%= link_to 'Tubuyakuu一覧画面に戻る', posts_path %>
     <%= link_to '新しくTubuyakuu〜', new_post_path %>
 
-    </table>
-  <% end %>
+  </table>
+<% end %>

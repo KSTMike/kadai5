@@ -1,33 +1,33 @@
 <%= form_with(model: @post, local: true,url: choose_new_or_edit ) do |form| %>
-    <% if @post.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= @post.errors.count %>件のエラーがあります。<h2>
-        <ul>
-        <% @post.errors.full_messages.each do |msg| %>
-          <li><%= msg %><li>
-        <% end %>
-        <ul>
-      </div>
-    <% end %>
-
-    <div class="post_content">
-      <%= form.label :content %>
-      <%= form.text_field :content %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @post.errors.count %>件のエラーがあります。<h2>
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %><li>
+      <% end %>
+      <ul>
     </div>
+  <% end %>
 
-    <%= form.submit %>
-    <h1>Tubuyakuu一覧</h1>
+  <div class="post_content">
+    <%= form.label :content %>
+    <%= form.text_field :content %>
+  </div>
 
-    <table>
-      <tr>
-        <th>内容</th>
-      </tr>
-    
-      <tr>
-        <td><%= @post.content %></td>
-      </tr>
+  <%= form.submit %>
+  <h1>Tubuyakuu一覧</h1>
 
-    <%= link_to 'Tubuyakuu一覧画面に戻る', posts_path %>
-    <%= link_to '新しくTubuyakuu〜', new_post_path %>
-    </table>
+  <table>
+    <tr>
+      <th>内容</th>
+    </tr>
+  
+    <tr>
+      <td><%= @post.content %></td>
+    </tr>
+
+  <%= link_to 'Tubuyakuu一覧画面に戻る', posts_path %>
+  <%= link_to '新しくTubuyakuu〜', new_post_path %>
+  </table>
 <% end %>
