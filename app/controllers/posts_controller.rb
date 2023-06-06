@@ -1,18 +1,36 @@
 class PostsController < ApplicationController
     def index
-        @posts = Post.all
+        # @post = Post.all
+        @posts = Posts.all
+        raise
+      end
+        # binding.pry
     end
 
     def new
-        @post = Post.new
+        @post = Post.new(post_params)
     end
 
-    # @post = Post.find(params[id:])
-    # @post.update(post_params)
-
     def create
-        Post.create(post_params)
-        redirect_to new_post_path
+        @post = Post.new(post_params)
+        if psrams[:back]
+            render :new
+        else        
+          if @post.save
+            redirect_to posts_path, notice: "Tubuyakuuを作成しました！" # new_post_path 
+          else
+            render :new
+          end
+        end # Post.create(params.require(:content).permit(:content))
+    end
+
+    def new #create
+    #    Post.new(post_params) #create new
+    #    if @post.save
+    #        redirect_to new_post_path, notice: "Tubuyakuuを作成しました！"
+    #    else
+    #        render :new
+    #    end
     end
 
     def show
@@ -24,9 +42,14 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
     end
 
+    def confirm
+        @post = Post.new(post_params)
+        render :new if @post.invalid?
+    end 
+
     def update
-        @post = Post.update(params[:id])
-        if @post.update(post_params)
+        @post = Post.find(params[:id]) # 編集したい投稿のidを取得
+        if @post.update(post_params) # その投稿を更新
             redirect_to posts_path, notice: "Tubuyakuuを編集しました！"
         else
             render :edit
@@ -38,11 +61,15 @@ class PostsController < ApplicationController
         redirect_to posts_path, notice: "Tubuyakuuを削除しました！"
     end
 
-    private
+    def link_to
+        @post = Post.find(params[:id])
+    end
 
     def set_post
         @post = Post.find(params[:id])
     end
+
+    private
 
     def post_params
         params.require(:post).permit(:content)
