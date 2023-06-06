@@ -1,36 +1,23 @@
 class PostsController < ApplicationController
     def index
-        # @post = Post.all
-        @posts = Posts.all
-        raise
-      end
-        # binding.pry
+        @posts = Post.all
     end
 
     def new
-        @post = Post.new(post_params)
+        @post = Post.new
     end
 
     def create
         @post = Post.new(post_params)
-        if psrams[:back]
+        if params[:back]
             render :new
         else        
           if @post.save
-            redirect_to posts_path, notice: "Tubuyakuuを作成しました！" # new_post_path 
+            redirect_to posts_path, notice: "Tubuyakuuを作成しました！"  
           else
             render :new
           end
-        end # Post.create(params.require(:content).permit(:content))
-    end
-
-    def new #create
-    #    Post.new(post_params) #create new
-    #    if @post.save
-    #        redirect_to new_post_path, notice: "Tubuyakuuを作成しました！"
-    #    else
-    #        render :new
-    #    end
+        end 
     end
 
     def show
